@@ -4,7 +4,7 @@
 								<section id="banner" class="banner">
 									<div class="content">
 										<header>
-											<h1>Craft your future platform</h1>
+											<h1>About CYF</h1>
 											<p>Get you prepared for a circular economy</p>
 										</header>
 										<p>The purposeful learning model turns things around. It is not the teacher who is leading the learning experience but the the context that does. The educators, together with the whole community, do facilitate the creation of the context.</p>

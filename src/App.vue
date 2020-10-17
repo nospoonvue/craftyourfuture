@@ -8,7 +8,7 @@
 
 							<!-- Header -->
 								<header id="header">
-									<a href="index.html" class="logo"><strong>Starbase 18</strong></a>
+									<a href="index.html" class="logo"><strong>Craft Your Future - Student and Teacher platform</strong></a>
 									<ul class="icons">
 										<!-- <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>-->
 										<li><a href="https://www.facebook.com/frank.kroondijk" target="_blank" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
@@ -22,7 +22,7 @@
               					<router-view/>
 
 								<footer id="footer" style="text-align:center">
-									<p class="copyright">&copy; Starbase18</p>
+									<p class="copyright">&copy; Craft Your Future</p>
 								</footer>
 						</div>
 					</div>
@@ -32,7 +32,7 @@
 					<div id="sidebar">
 						<div class="inner">
 							<div id="logo" style="width:100%;text-align:center">
-							<img src="images/pl-logo.png" style="max-width:100px; ">
+							<img src="images/cyf-logo.png" style="max-width:100px; ">
 							</div>
 							<!-- Search 
 								<section id="search" class="alt">
@@ -143,7 +143,7 @@
 //import something from "./assets/js/something.js"
 //import "./assets/js/jquery.min.js"
 import sideBar from "./assets/js/main.js"
-import "./assets/css/main.css"
+import "./assets/css/main.css?fds=fsf"
 //import "./assets/css/sss.css"
 
 
