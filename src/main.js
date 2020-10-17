@@ -9,8 +9,6 @@ Vue.config.productionTip = false
 Vue.prototype.$baseUrl = "https://script.google.com/macros/s/AKfycbzFu9XjeWN1BKMEYe6kNv16jQhiatpqBTFj0mlEfg/exec"
 
 
-
-
 new Vue({
   router,
   store,
