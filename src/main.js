@@ -6,7 +6,8 @@ import store from './store'
 import VueMarkdown from 'vue-markdown'
 
 Vue.config.productionTip = false
-Vue.prototype.$baseUrl = "https://script.google.com/macros/s/AKfycbxdxAaP33kUP1kO0J4TOHKdz6FMoiIVPCqQvrGaoNfrWbAeJiY/exec"
+Vue.prototype.$baseUrl = "https://script.google.com/macros/s/AKfycbzFu9XjeWN1BKMEYe6kNv16jQhiatpqBTFj0mlEfg/exec"
+
 
 
 

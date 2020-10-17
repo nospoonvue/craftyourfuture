@@ -4,8 +4,10 @@
 								<section id="banner" class="banner">
 									<div class="content">
 										<header>
-											<h1>About CYF</h1>
-											<p>Get you prepared for a circular economy</p>
+											<h1>WHY CRAFT YOUR FUTURE?</h1>
+											<p>
+												Craft Your Future contributes to social cohesion by letting young people become closer to and more involved with their region’s cultural heritage. Students will become aware of their regions traditional crafts and spot the threats that this specific cultural heritage is facing. By being aware of and actively involved with cultural heritage, students will learn to cherish it and realize that it is more than historical monuments left behind from the past. Students will grasp that cultural heritage is all the things, places and practices that define who we are as individuals, as communities, as regions. It will enhance the sense of local pride of youngsters and therefor the liveability of a region.
+											</p>
 										</header>
 										<p>The purposeful learning model turns things around. It is not the teacher who is leading the learning experience but the the context that does. The educators, together with the whole community, do facilitate the creation of the context.</p>
 										<ul class="actions">
@@ -13,7 +15,7 @@
 										</ul>
 									</div>
 									<span class="image object">
-										<img src="images/pic10.jpg" alt="" />
+										<img src="images/mainimage.jpg" alt="" />
 
 
 									</span>
