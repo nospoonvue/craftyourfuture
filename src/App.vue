@@ -58,6 +58,7 @@
 										<li><router-link to="/projects" >Projects</router-link></li>
 										<li><router-link to="/blog" >Blog</router-link></li>
 										<li><router-link to="/courses" >Courses</router-link></li>
+										<li><router-link to="/cards" >Cards</router-link></li>
 										<!--
 										<li><a href="index.html">Homepage</a></li>
 										<li><a href="generic.html">Generic</a></li>
