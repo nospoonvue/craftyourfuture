@@ -20,11 +20,16 @@
 								</header>
 
               					<router-view/>
-
-								<footer id="footer" style="text-align:center">
+								  <div id="wrap">
+								<footer id="footer"  style="float:left; ">
+									<div style="text-align:center;width:100%">
 									<p class="copyright">&copy; Craft Your Future</p>
+									</div>
 								</footer>
+								</div>
 						</div>
+
+
 					</div>
 
 				<!-- Sidebar -->

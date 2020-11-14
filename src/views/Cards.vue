@@ -3,11 +3,11 @@
     
     <Status class="StatusShow" v-bind:img="status" v-show="loading" />
 
-    <section id="" class="post" v-for="item in info" :key="item.id">
+    <section id="" class="post" v-for="item in info" :key="item.id" style="float: left;">
 
 
-        <div class="content" style="float: left;" >
-        <br/>
+        <div class="content"  >
+      <br/>
         <!--
         <span class="image object">
                 <img v-bind:src="item.fields.Photos[0].url" v-bind:alt="item.fields.Title" style="width:100%" />
@@ -25,16 +25,18 @@
             <div class="flip-card">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
+                    <div class="head-and-text">
                     <div v-bind:class="item.fields.css + ' card-content'">
-                    <div style="text-align:right;padding-right:10px;padding-top:5px;font-size:1.5em;">                   
-                        {{ item.fields.TypeName[0] }}
-                    </div>
-                    <div style="text-align:left;padding-left:10px;font-size:2em;">                    
-                        {{ item.fields.Title }}
-                    </div>
+                        <div style="text-align:right;padding-right:10px;padding-top:5px;font-size:1.5em;">                   
+                            {{ item.fields.TypeName[0] }}
+                        </div>
+                        <div style="text-align:left;padding-top:20px;padding-left:10px;font-size:2em;line-height: 85%;">                    
+                            {{ item.fields.Title }}
+                        </div>
                     </div>
                     <img v-bind:src="item.fields.Photos[0].url" v-bind:alt="item.fields.Title" style="width:100%" />
                     <vue-markdown class="front-text">{{ item.fields.FrontText }}</vue-markdown>
+                    </div>
                     <div v-bind:class="item.fields.css" style="text-align:left;padding-left:10px;font-size:1em;"> 
                         {{ item.fields.Id }}
                     </div>
@@ -76,16 +78,16 @@ margin: 10px;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
 
-.card-footer{
-    top:100%;
-    background-color: aqua;
-}
+
 .card-content{
     border-radius: 15px 15px 0 0;
-    height: 80px;
+    height: 100px;
     
     padding-top: 3px;;
     font-family: 'Goldman', cursive;
+}
+.head-and-text{
+height: 410px;
 }
 
 .craft{
@@ -218,7 +220,7 @@ export default
         status: "",
         offset: "",
         offsetHistoryCursor: 0,
-        pageSize: 5,
+        pageSize: 30,
         offsetHistory: [],  
         table: "Cards",
         view: "Public"
