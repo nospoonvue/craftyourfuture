@@ -24,27 +24,42 @@
         -->
             <div class="flip-card">
             <div class="flip-card-inner">
-                <div class="flip-card-front">
+                <div  v-bind:class="item.fields.css + ' flip-card-front'" >
                     <div class="head-and-text">
-                    <div v-bind:class="item.fields.css + ' card-content'">
-                        <div style="text-align:right;padding-right:10px;padding-top:5px;font-size:1.5em;">                   
+                    <div v-bind:class="item.fields.css + ' card-content front-card'">
+                        <div style="text-align:right;padding-right:10px;padding-top:5px;font-size:1.8em;color:#000000;">                   
                             {{ item.fields.TypeName[0] }}
                         </div>
-                        <div style="text-align:left;padding-top:20px;padding-left:10px;font-size:2em;line-height: 85%;">                    
-                            {{ item.fields.Title }}
+                        <div style="text-align:left;padding-top:42px;padding-left:10px;font-size:3em;color:#ffffff; line-height: 85%;">                    
+                          {{ item.fields.Title }}
                         </div>
                     </div>
                     <img v-bind:src="item.fields.Photos[0].url" v-bind:alt="item.fields.Title" style="width:100%" />
-                    <vue-markdown class="front-text">{{ item.fields.FrontText }}</vue-markdown>
+                 
                     </div>
-                    <div v-bind:class="item.fields.css" style="text-align:left;padding-left:10px;font-size:1em;"> 
+                    <div v-bind:class="item.fields.css" style="text-align:left;padding-left:15px;padding-top:8px;font-size:1em;"> 
                         {{ item.fields.Id }}
                     </div>
                 </div>
                 <div class="flip-card-back">
-                <h1>{{ item.fields.Title }}</h1>
-                <p><vue-markdown>{{ item.fields.FrontText }}</vue-markdown></p>
+                    <div class="head-and-text-back">
+                        <div v-bind:class="item.fields.css + ' card-content back-card'">
+                            <div style="text-align:left;padding-top:14px;padding-left:10px;font-size:2em;color:#ffffff; line-height: 85%;">                    
+                            {{ item.fields.Title }}
+                            </div>
+                        </div>
+                        <div style="text-align:left;padding-top:5px;padding-left:5px;padding-right:5px;font-size:.9em;color:#000000; font-family:'Comfortaa';height:150px; word-break: normal;">                    
+                            {{ item.fields.FrontText }}
+                        </div>
 
+                        <iframe width="100%" height="137px" v-bind:src="item.fields.YoutubeMovie" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope;" allowfullscreen></iframe>
+                        <div style="padding:12px;" >
+                            <div class="" v-for="(source, index) in item.fields.SourcesUrls" :key="source.Title" style="float:left;" >                         
+                                <a v-bind:href="item.fields.SourcesUrls[index]"  target="_blank" style="text-decoration: none;border:0;" > <img src="images/link.png" onmouseout="document.getElementById('titlediv').innerHTML = '';"  onmouseover="document.getElementById('titlediv').innerHTML = 'go to: '+ this.alt;"  v-bind:alt="item.fields.SourceTitles[index]" style="margin:1px;" /></a>
+                            </div>
+                        </div>
+                        <div v-bind:class="item.fields.css" style="margin-top:55px;height:35px; border-radius: 0 0 15px 15px;padding:6px;" id="titlediv" > </div>
+                    </div>
                 </div>
 
             </div>
@@ -64,32 +79,45 @@
 
 
 <style >
-@import url('https://fonts.googleapis.com/css2?family=Goldman&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Goldman&display=swap');*/
+@import url('https://use.typekit.net/mqh8lqg.css');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+
+
+
 /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
 .flip-card {
 
-margin: 10px;
+  margin: 10px;
   width: 300px;
   max-width: 100%;
-  height: 450px;
+  height: 455px;
   font-size: .7em;
   border-radius: 0 0 15px 15px;
   
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
+.front-card{
+    height: 148px;
+ 
+    padding-top: 3px;;
+}
+.back-card{
+    height: 48px;
 
+    padding-top: 3px;;
+}
 
 .card-content{
     border-radius: 15px 15px 0 0;
-    height: 100px;
-    
-    padding-top: 3px;;
-    font-family: 'Goldman', cursive;
+    font-family: "sui-generis",sans-serif;;
 }
 .head-and-text{
-height: 410px;
+    height: 410px;
 }
-
+.head-and-text-back{
+    height: 380px;
+}
 .craft{
 
     background-color:#8e4e9d;
@@ -136,9 +164,7 @@ padding: 1em;
 
 /* Style the front side (fallback if image is missing) */
 .flip-card-front {
-  background-color:ivory;
-  color: black;
-  background-color: rgb(212, 209, 209);
+
 }
 
 /* Style the back side */
