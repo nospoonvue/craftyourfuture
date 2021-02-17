@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Projects from '../views/Projects.vue'
 import Blog from '../views/Blog.vue'
-import Cards from '../views/Cards.vue'
+import Knowledgebase from '../views/Knowledgebase.vue'
 import Login from '../views/Login.vue'
 import Courses from '../views/Courses.vue'
 import Course from '../views/Course.vue'
@@ -35,9 +35,9 @@ Vue.use(VueRouter)
   component: Blog
   },
   {
-    path: '/cards',
-    name: 'Cards',
-    component: Cards
+    path: '/knowledgebase',
+    name: 'Knowledgebase',
+    component: Knowledgebase
     },
   {
   path: '/login',
