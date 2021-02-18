@@ -10,18 +10,20 @@
         </div>
     </section>
 
-    <section id="cardtypes" class="post" style="float: left;clear: both;width:100%">
-        <div  v-for="cardtype in cardtypes" :key="cardtype.Name" style="float: left;" class="content">
+    <section id="cardtypes" class="post" style="float: left;clear: both;width:100%;text-align:center;">
+        <div style="margin: auto;width:100%;">
+        <div  v-for="cardtype in cardtypes" :key="cardtype.Name" style="float: left;" >
             <div v-if="showallcardtypes" class="circle" @click="getCards(cardtype.fields.Filter)"          v-bind:style="{background:cardtype.fields.Color}" >{{ cardtype.fields.Name}} </div>
        
            <!-- <div v-if="cardtype.fields.Filter==view"  class="circle" @click="getCards(cardtype.fields.Filter)"          v-bind:style="{background:cardtype.fields.Color}" >{{ cardtype.fields.Name}} </div>-->
             <div v-if="cardtype.fields.Filter==view"  class="circle" @click="getCardTypes()"    v-bind:style="{background:cardtype.fields.Color}" >All card types</div>
-            <div v-if="cardtype.fields.Filter==view"  class="circle" @click="getAssignments('Introduction assignment')"    v-bind:style="{background:cardtype.fields.Color}" >Introduction</div>            
-            <div v-if="cardtype.fields.Filter==view"  class="circle" @click="getAssignments('Zoom in assignment')"    v-bind:style="{background:zoomincolor}" >Zoom in</div>
-            <div v-if="cardtype.fields.Filter==view"  class="circle" @click="getAssignments('Connect the dots')"    v-bind:style="{background:dotscolor}" >Connect the dots</div>
+            <div v-if="cardtype.fields.Filter==view"  class="circle" @click="getAssignments('Introduction assignment')"    v-bind:style="{background:cardtype.fields.Color}" >Intro assignments</div>            
+            <div v-if="cardtype.fields.Filter==view"  class="circle" @click="getAssignments('Zoom in assignment')"    v-bind:style="{background:zoomincolor}" >Zoom in<br/>assignments</div>
+            <div v-if="cardtype.fields.Filter==view"  class="circle" @click="getAssignments('Connect the dots')"    v-bind:style="{background:dotscolor}" >Connect the dots<br/>assignments</div>
             <div v-if="cardtype.fields.Filter==view"  class="circle" @click="getTools()"    v-bind:style="{background:cardtype.fields.Color}" >Tools</div>
+            <div v-if="cardtype.fields.Filter==view"  class="circle" @click="getTools()"    v-bind:style="{background:cardtype.fields.Color}" >Knowledge base</div>
         </div>
-        
+        </div>
     </section>
 
     <section id="allcards" class="post" style="clear: both;">        
@@ -87,23 +89,20 @@
 /*@import url('https://fonts.googleapis.com/css2?family=Goldman&display=swap');*/
 @import url('https://use.typekit.net/mqh8lqg.css');
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
-
 .circle
     {
         float:left;
         cursor: pointer;
-    width:200px;
-    height:200px;
-    border-radius:50%;
-    font-size:18px;
-    color:#ffffff;
-    line-height:200px;
-    text-align:center;
-    margin: 5px;
-    
+        width:200px;
+        height:200px;
+        border-radius:50%;
+        font-size:18px;
+        color:#ffffff;
+        line-height:200px;
+        text-align:center;
+        margin: 5px;    
     }
 
-/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
 .flip-card {
 
   margin: 10px;
@@ -114,7 +113,54 @@
   border-radius: 0 0 15px 15px;
   
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}    
+
+@media only screen and (max-width: 950px) {
+.circle
+    {
+        width:150px;
+        height:150px;
+        font-size:14px;
+        line-height:150px;  
+    }
 }
+@media only screen and (max-width: 630px) {
+.circle
+    {
+        float:left;
+        cursor: pointer;
+        width:100px;
+        height:100px;
+        font-size:11px;
+        line-height:100px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+.circle
+    {
+        width:50px;
+        height:50px;
+        font-size:8px;
+        line-height:8px;
+        margin: 5px;
+        padding-top: 16px;
+    }
+.flip-card 
+    {
+        margin: 5px;
+        width: 270px;
+        max-width: 100%;
+        height: 455px;
+        font-size: .7em;
+        border-radius: 0 0 15px 15px;
+
+        perspective: 1000px; /* Remove this if you don't want the 3D effect */
+    }  
+
+}
+/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+
 .front-card{
     height: 148px;
  

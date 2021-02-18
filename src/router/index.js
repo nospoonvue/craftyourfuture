@@ -7,6 +7,7 @@ import Knowledgebase from '../views/Knowledgebase.vue'
 import Login from '../views/Login.vue'
 import Courses from '../views/Courses.vue'
 import Course from '../views/Course.vue'
+import Discover from '../views/Discover.vue'
 
 Vue.use(VueRouter)
 
@@ -17,13 +18,10 @@ Vue.use(VueRouter)
     component: Home
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  },
+    path: '/discover',
+    name: 'Discover',
+    component: Discover
+    },
   {
   path: '/projects',
   name: 'Projects',
