@@ -28,7 +28,7 @@
                                 <div style="text-align:right;padding-right:10px;padding-top:5px;font-size:1.8em;color:#000000;">                   
                                     {{ item.fields.TypeName[0] }}
                                 </div>
-                                <div style="text-align:left;padding-top:42px;padding-left:10px;font-size:3em;color:#ffffff; line-height: 85%;">                    
+                                <div style="text-align:left;padding-top:52px;padding-left:10px;font-size:2em;color:#ffffff; line-height: 90%;">                    
                                 {{ item.fields.Title }}
                                 </div>
                             </div>
@@ -41,8 +41,8 @@
                         </div>
                         <div class="flip-card-back">
                             <div class="head-and-text-back">
-                                <div v-bind:class="item.fields.css + ' card-content back-card'">
-                                    <div style="text-align:left;padding-top:14px;padding-left:10px;font-size:2em;color:#ffffff; line-height: 85%;">                    
+                                <div v-bind:class="item.fields.css + ' card-content back-card'" style="display: table; overflow: hidden;width:100%">
+                                    <div style="display: table-cell; vertical-align: middle;text-align:center;padding-top:3px;padding-left:3px;font-size:1.8em;color:#ffffff; line-height: 85%;">                    
                                     {{ item.fields.Title }}
                                     </div>
                                 </div>
@@ -97,7 +97,7 @@
 /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
 .flip-card {
 
-  margin: 10px;
+  margin: 20px;
   width: 300px;
   max-width: 100%;
   height: 455px;

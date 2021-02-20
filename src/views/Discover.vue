@@ -30,7 +30,7 @@
         <div id="" class="post" v-for="item in info" :key="item.id" style="float: left;">
             <div class="content"  >
                 <br/>
-                <div class="flip-card">
+               <div class="flip-card">
                     <div class="flip-card-inner">
                         <div  v-bind:class="item.fields.css + ' flip-card-front'" >
                             <div class="head-and-text">
@@ -38,7 +38,7 @@
                                 <div style="text-align:right;padding-right:10px;padding-top:5px;font-size:1.8em;color:#000000;">                   
                                     {{ item.fields.TypeName[0] }}
                                 </div>
-                                <div style="text-align:left;padding-top:42px;padding-left:10px;font-size:3em;color:#ffffff; line-height: 85%;">                    
+                                <div style="text-align:left;padding-top:52px;padding-left:10px;font-size:2em;color:#ffffff; line-height: 90%;">                    
                                 {{ item.fields.Title }}
                                 </div>
                             </div>
@@ -51,8 +51,8 @@
                         </div>
                         <div class="flip-card-back">
                             <div class="head-and-text-back">
-                                <div v-bind:class="item.fields.css + ' card-content back-card'">
-                                    <div style="text-align:left;padding-top:14px;padding-left:10px;font-size:2em;color:#ffffff; line-height: 85%;">                    
+                                <div v-bind:class="item.fields.css + ' card-content back-card'" style="display: table; overflow: hidden;width:100%">
+                                    <div style="display: table-cell; vertical-align: middle;text-align:center;padding-top:3px;padding-left:3px;font-size:1.8em;color:#ffffff; line-height: 85%;">                    
                                     {{ item.fields.Title }}
                                     </div>
                                 </div>
