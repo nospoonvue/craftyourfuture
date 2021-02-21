@@ -53,10 +53,10 @@
                                 <iframe width="100%" height="137px" v-bind:src="item.fields.YoutubeMovie" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope;" allowfullscreen></iframe>
                                 <div style="padding:12px;" >
                                     <div class="" v-for="(source, index) in item.fields.SourcesUrls" :key="source.Title" style="float:left;" >                         
-                                        <a v-bind:href="item.fields.SourcesUrls[index]"  target="_blank" style="text-decoration: none;border:0;" > <img src="images/link.png" onmouseout="document.getElementById('titlediv').innerHTML = '';"  onmouseover="document.getElementById('titlediv').innerHTML = 'go to: '+ this.alt;"  v-bind:alt="item.fields.SourceTitles[index]" style="margin:1px;" /></a>
+                                        <a v-bind:href="item.fields.SourcesUrls[index]"  target="_blank" style="text-decoration: none;border:0;" > <img src="images/link.png" :onmouseout="mouseOutSource(item.fields.Title)" :onmouseover="mouseOverSource(item.fields.Title, item.fields.SourceTitles[index])"  v-bind:alt="item.fields.SourceTitles[index]" style="margin:1px;" /></a>
                                     </div>
                                 </div>
-                                <div v-bind:class="item.fields.css" style="margin-top:55px;height:35px; border-radius: 0 0 15px 15px;padding:6px;" id="titlediv" > </div>
+                                <div v-bind:class="item.fields.css" style="margin-top:55px;height:35px; border-radius: 0 0 15px 15px;padding:6px;" :id="item.fields.Title" > </div>
                             </div>
                         </div>
 
@@ -274,6 +274,15 @@ export default
     },
     methods:
     {
+        mouseOutSource: function(divId)
+        {            
+  
+            return "document.getElementById('" + divId + "').innerHTML = '';";
+        },
+        mouseOverSource: function(divId, captionText)
+        {            
+            return "document.getElementById('" + divId +"').innerHTML = 'go to: " + captionText +"';";
+        },  
         getCardTypes: function()
         {
             this.table = "CardTypes";
