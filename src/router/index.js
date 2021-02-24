@@ -8,6 +8,7 @@ import Login from '../views/Login.vue'
 import Courses from '../views/Courses.vue'
 import Course from '../views/Course.vue'
 import Discover from '../views/Discover.vue'
+import Tools from '../views/Tools.vue'
 
 Vue.use(VueRouter)
 
@@ -37,6 +38,11 @@ Vue.use(VueRouter)
     name: 'Knowledgebase',
     component: Knowledgebase
     },
+    {
+      path: '/tools',
+      name: 'Tools',
+      component: Tools
+      },    
   {
   path: '/login',
   name: 'Login',

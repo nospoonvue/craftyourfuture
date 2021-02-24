@@ -81,7 +81,7 @@ async function getData(viewStatus,action)
         {
         }
     }
-
+//viewStatus.application = this.$appName;
     const formData = new FormData();
     formData.append('action', action);
     formData.append('data', JSON.stringify(viewStatus.user));
@@ -102,7 +102,7 @@ async function getData(viewStatus,action)
                     viewStatus.loading = false;
                     return;
                 }
-                if(action == 'delete')
+                if(action == 'deleteUser')
                 {
                     viewStatus.clearUser();
                     viewStatus.loading = false;
@@ -110,19 +110,19 @@ async function getData(viewStatus,action)
                 }
                 //multiple record return
                 var userFound = false;
-                if(action == "read" && response.data.records[0])
+                if(action == "readUser" && response.data.records[0])
                 {
                     viewStatus.user = response.data.records[0].fields;
                     userFound = true;
                 }
-                if(action == "read" && !userFound)
+                if(action == "readUser" && !userFound)
                 {
                     //login failed
                     viewStatus.errors.push("Login failed");
                 }
 
                 //single record return
-                if((action == "create" || action == "update") && response.data.fields)
+                if((action == "createUser" || action == "updateUser") && response.data.fields)
                 {
                     viewStatus.user = response.data.fields;  
                     userFound = true;
@@ -143,7 +143,7 @@ async function getData(viewStatus,action)
                 }
                 else
                 {
-                    //alert(response.data);
+                    alert(response.data);
                     viewStatus.errors.push("User not found");
                     document.getElementById('un').innerHTML = "Login";
                 }
@@ -155,7 +155,8 @@ async function getData(viewStatus,action)
                 function (error) 
                 {
                     console.log(error);
-                    //alert(error);
+                   // alert(error);
+                   
                     viewStatus.errors.push("An error occored");
                     viewStatus.loading = false;
                 }
@@ -185,7 +186,7 @@ export default
     {
         getLogin: function()
         {
-            getData(this, 'read');
+            getData(this, 'readUser');
         },
         logOut: function()
         {
@@ -198,7 +199,7 @@ export default
         },
         getAccount: function()
         {
-            getData(this, 'create');
+            getData(this, 'createUser');
         },
         clearUser: function()
         {
@@ -211,15 +212,15 @@ export default
         },
         updateProfile: function()
         {
-        
-            getData(this, 'update');
+           
+            getData(this, 'updateUser');
             
         },
         deleteProfile: function()
         {
             if(confirm("Do you really want to remove your account? This can not be undone!"))
             {
-                getData(this, 'delete');
+                getData(this, 'deleteUser');
             }
             
         },
