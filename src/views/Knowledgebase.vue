@@ -3,7 +3,7 @@
     
     <Status class="StatusShow" v-bind:img="status" v-show="loading" />
     <DynamicWebText :label="'KBIntro'" v-bind:language="getLanguage" :key="keytest"/>
-    <CardTypes :cardtypes="cardtypes" :parent="this" />
+    <CardTypes :cardtypes="cardtypes" :parent="this" v-bind:language="getLanguage"/>
     <Cards :info="info" />
    
     <section class="post">

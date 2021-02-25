@@ -1,14 +1,15 @@
 
 <template>
      <div id="app">
+		 <DynamicLabelLoader :state="this" />
       <div id="wrapper">
 				<!-- Main -->
 					<div id="main">
 						<div class="inner">
-
+							
 							<!-- Header -->
 								<header id="header">
-									<a href="index.html" class="logo"><strong>Craft Your Future - Student and Teacher platform</strong></a>
+									<a href="index.html" class="logo"><strong><DynamicLabel label="Craft Your Future - Student and Teacher platform"  :key="'main'+getKey"/></strong></a>
 									<ul class="icons">
 										<!-- <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>-->
 										<li><a href="https://www.facebook.com/frank.kroondijk" target="_blank" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
@@ -60,14 +61,14 @@
               				<div id="nav">
 								<nav id="menu">
 									<header class="major">
-										<h2>Menu</h2>
+										<h2><DynamicLabel label="Menu"  :key="'menu'+getKey"/></h2>
 									</header>
 									<ul>
                         
-										<li><router-link to="/">Home</router-link></li>
-										<li><router-link to="/discover">Get started</router-link></li>							
-										<li><router-link to="/knowledgebase" >Knowledge base</router-link></li>
-										<li><router-link to="/tools" >Tools</router-link></li>
+										<li><router-link to="/"><DynamicLabel label="Home"  :key="'home'+getKey"/></router-link></li>
+										<li><router-link to="/discover"><DynamicLabel label="Get started"  :key="'started'+getKey"/></router-link></li>							
+										<li><router-link to="/knowledgebase" ><DynamicLabel label="Knowledge base"  :key="'base'+getKey"/></router-link></li>
+										<li><router-link to="/tools" ><DynamicLabel label="Tools"  :key="'tools'+getKey"/></router-link></li>
 									</ul>
 								</nav>
               				</div>
@@ -94,8 +95,8 @@
 //import "./assets/js/jquery.min.js"
 import sideBar from "./assets/js/main.js"
 import "./assets/css/main.css?fds=fsf"
-
-
+import DynamicLabelLoader from '@/components/DynamicLabelLoader.vue'
+import DynamicLabel from '@/components/DynamicLabel.vue'
 //import "./assets/css/sss.css"
 
 
@@ -106,6 +107,7 @@ export default {
 		 return {
 			 user: {},
 			 loginLabel:'Login',
+			 keyId:1,
 		
 		 }
    	},	   
@@ -116,18 +118,26 @@ export default {
 	sideBar();
   },
  components: {
-   //AccountInfo
+   DynamicLabelLoader,
+   DynamicLabel
  },
 
    methods: {
       	sideBar,
 		setLanguage: function(lang)
 		{
-			//this.$store.commit('setLanguage',null);
 			this.$store.commit('setLanguage',lang);		
+			this.keyId++;
 
 		}
       
+   },
+   computed:
+   {
+	   getKey: function()
+	   {
+		return this.keyId;
+	   }
    },
    created() 
     {

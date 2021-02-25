@@ -8,14 +8,13 @@
                         <div  v-bind:class="item.fields.css + ' flip-card-front'" >
                             <div class="head-and-text">
                             <div v-bind:class="item.fields.css + ' card-content front-card'">
-                                <div style="text-align:right;padding-right:10px;padding-top:5px;font-size:1.8em;color:#000000;">                   
-                                    {{ item.fields.TypeName[0] }}
+                                <div style="text-align:right;padding-right:10px;padding-top:5px;font-size:1.8em;color:#000000;">  
+                                    <!--<DynamicLabel :label="item.fields.TypeName[0]" :key="getKey+item.fields.TitleENG" />-->
+                                    {{ getLabelFromCache(item.fields.TypeName[0]) }}
                                 </div>
-                                <div style="text-align:left;padding-top:52px;padding-left:10px;font-size:2em;color:#ffffff; line-height: 90%;">                    
-                                {{ item.fields.TitleNL }}
-                                </div>
+                                <div style="text-align:left;padding-top:52px;padding-left:10px;font-size:2em;color:#ffffff; line-height: 90%;">{{ getLabel('Title', item) }}</div>
                             </div>
-                            <img v-bind:src="item.fields.Photos[0].url" v-bind:alt="item.fields.Title" style="width:100%" />
+                            <img v-bind:src="item.fields.Photos[0].url" v-bind:alt="getLabel('Title', item)" style="width:100%" />
                         
                             </div>
                             <div v-bind:class="item.fields.css" style="text-align:left;padding-left:15px;padding-top:8px;font-size:1em;"> 
@@ -25,21 +24,19 @@
                         <div class="flip-card-back">
                             <div class="head-and-text-back">
                                 <div v-bind:class="item.fields.css + ' card-content back-card'" style="display: table; overflow: hidden;width:100%">
-                                    <div style="display: table-cell; vertical-align: middle;text-align:center;padding-top:3px;padding-left:3px;font-size:1.8em;color:#ffffff; line-height: 85%;">                    
-                                    {{ item.fields.TitleNL }}
-                                    </div>
+                                    <div  style="display: table-cell; vertical-align: middle;text-align:center;padding-top:3px;padding-left:3px;font-size:1.8em;color:#ffffff; line-height: 85%;">{{ getLabel('Title', item) }}</div>
                                 </div>
                                 <div style="text-align:left;padding-top:5px;padding-left:5px;padding-right:5px;font-size:.9em;color:#000000; font-family:'Comfortaa';height:150px; word-break: normal;">                    
-                                    {{ item.fields.TextNL }}
+                                    {{ getLabel('Text', item) }}
                                 </div>
 
                                 <iframe width="100%" height="137px" v-bind:src="item.fields.YoutubeMovie" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope;" allowfullscreen></iframe>
                                 <div style="padding:12px;" >
                                     <div class="" v-for="(source, index) in item.fields.SourcesUrls" :key="source.Title" style="float:left;" >                         
-                                        <a v-bind:href="item.fields.SourcesUrls[index]"  target="_blank" style="text-decoration: none;border:0;" > <img src="images/link.png" :onmouseout="mouseOutSource(item.fields.Title)" :onmouseover="mouseOverSource(item.fields.Title, item.fields.SourceTitles[index])"  v-bind:alt="item.fields.SourceTitles[index]" style="margin:1px;" /></a>
+                                        <a v-bind:href="item.fields.SourcesUrls[index]"  target="_blank" style="text-decoration: none;border:0;" > <img src="images/link.png" :onmouseout="mouseOutSource(item.fields.TitleENG)" :onmouseover="mouseOverSource(item.fields.TitleENG, item.fields.SourceTitles[index])"  v-bind:alt="item.fields.SourceTitles[index]" style="margin:1px;" /></a>
                                     </div>
                                 </div>
-                                <div v-bind:class="item.fields.css" style="margin-top:55px;height:35px; border-radius: 0 0 15px 15px;padding:6px;" :id="item.fields.Title" > </div>
+                                <div v-bind:class="item.fields.css" style="margin-top:55px;height:35px; border-radius: 0 0 15px 15px;padding:6px;" :id="item.fields.TitleENG" > </div>
                             </div>
                         </div>
 
@@ -175,8 +172,21 @@ padding: 1em;
 }
 </style>
 <script>
-export default {
+import DynamicLabel from '@/components/DynamicLabel.vue'
+
+export default {    
+
   name: 'Cards',
+  components:
+  {
+      DynamicLabel
+  },
+  data()
+  {
+      return{   
+          keyId: 1
+      }
+  },
   props: {
     info: null
     },
@@ -191,6 +201,77 @@ export default {
         {            
             return "document.getElementById('" + divId +"').innerHTML = 'go to: " + captionText +"';";
         }  
+        ,
+        getLabelFromCache: function(label)
+        {
+                //read label translation from state
+                let index = this.$store.state.labels.findIndex(item => item.fields.Label === label );
+         
+                switch(this.$store.state.language)
+                {
+                    case "ENG":
+                        return this.$store.state.labels[index].fields.TextENG;                        
+                        break;
+                    case "NL":
+                        return this.$store.state.labels[index].fields.TextNL;
+                        break;
+                    case "ESP":
+                        return this.$store.state.labels[index].fields.TextESP;
+                        break;
+                    case "BUL":
+                        return this.$store.state.labels[index].fields.TextBUL;
+                        break;                    
+                }
+        },
+        getLabel: function(typeLabel, source)
+        {
+            switch(typeLabel)
+            {
+                case "Title":
+                    switch(this.$store.state.language)
+                    {
+                        case "ENG":
+                            return source.fields.TitleENG;
+                            break;
+                        case "NL":
+                            return source.fields.TitleNL;
+                            break;
+                        case "ESP":
+                            return source.fields.TitleESP;
+                            break;
+                        case "BUL":
+                            return source.fields.TitleBUL;
+                            break;
+                    }
+                    break;
+                case "Text":
+                    switch(this.$store.state.language)
+                    {
+                        case "ENG":
+                            return source.fields.TextENG;
+                            break;
+                        case "NL":
+                            return source.fields.TextNL;
+                            break;
+                        case "ESP":
+                            return source.fields.TextESP;
+                            break;
+                        case "BUL":
+                            return source.fields.TextBUL;
+                            break;
+                    }                    
+                    break;                    
+            }
+
+        }
+    },
+    computed:
+    {
+        getKey: function()
+        {
+            return this.keyId++;
+        }
     }
+
 }
 </script>

@@ -4,85 +4,44 @@
 								<section id="banner" class="banner">
 									<div class="content">
 										<header>
-											<h1>WHY CRAFT YOUR FUTURE?</h1>
-											<p>
-												Craft Your Future contributes to social cohesion by letting young people become closer to and more involved with their region’s cultural heritage. Students will become aware of their regions traditional crafts and spot the threats that this specific cultural heritage is facing. By being aware of and actively involved with cultural heritage, students will learn to cherish it and realize that it is more than historical monuments left behind from the past. Students will grasp that cultural heritage is all the things, places and practices that define who we are as individuals, as communities, as regions. It will enhance the sense of local pride of youngsters and therefor the liveability of a region.
-											</p>
+											 <DynamicWebText :label="'Home page'" v-bind:language="this.$store.state.language" :key="getKey+this.$store.state.language"/>
 										</header>
-										<p>The purposeful learning model turns things around. It is not the teacher who is leading the learning experience but the the context that does. The educators, together with the whole community, do facilitate the creation of the context.</p>
-										<ul class="actions">
-											<li><a href="#" class="button big">Learn More</a></li>
-										</ul>
+
 									</div>
 									<span class="image object">
 										<img src="images/mainimage.jpg" alt="" />
-
-
 									</span>
 								</section>
-
-	
-
-							<!-- Section -->
-								<section>
-									<header class="major">
-										<h1>DISCOVER</h1>
-									</header>
-									<div class="posts">
-										<article>
-											<a href="#" class="image"><img src="images/pic01.jpg" alt="" /></a>
-											<h3>CRAFTS</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic02.jpg" alt="" /></a>
-											<h3>Nulla amet dolore</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic03.jpg" alt="" /></a>
-											<h3>Tempus ullamcorper</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic04.jpg" alt="" /></a>
-											<h3>Sed etiam facilis</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic05.jpg" alt="" /></a>
-											<h3>Feugiat lorem aenean</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic06.jpg" alt="" /></a>
-											<h3>Amet varius aliquam</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-									</div>
-								</section>
-
   </div>
 </template>
 
 <script>
+import DynamicWebText from '@/components/DynamicWebText.vue'
+
+
+
+export default 
+{
+    name: "home",
+    components: {DynamicWebText},
+
+    data() 
+    {
+    return {
+        keyId:1   
+        }
+    },
+    computed: {
+        getKey: function () {
+            
+            return this.keyId++;
+        }
+  },
+    created() 
+    {
+       
+    },
+}
+
 
 </script>

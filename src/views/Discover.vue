@@ -3,25 +3,28 @@
     
     <Status class="StatusShow" v-bind:img="status" v-show="loading" />
 
-    <DynamicWebText v-bind:label="dynamicLabel" v-bind:language="getLanguage" :key="keyId"/>
+    <DynamicWebText v-bind:label="dynamicLabel" v-bind:language="getLanguage" :key="'intro'+keyId"/>
 
     <section id="cardtypes" class="post" style="float: left;clear: both;width:100%;text-align:center;">
         <div style="margin: auto;width:100%;">
         <div  v-for="cardtype in cardtypes" :key="cardtype.Id" style="float: left;" >
-            <div v-if="showallcardtypes" class="circle" @click="getCards(cardtype.fields.Filter)"          v-bind:style="{background:cardtype.fields.Color}" >{{ cardtype.fields.TitleNL}} </div>
-       
+            <div v-if="showallcardtypes && getLanguage == 'NL'" class="circle" @click="getCards(cardtype.fields.Filter)" v-bind:style="{background:cardtype.fields.Color}" >{{ cardtype.fields.TitleNL}} </div>
+            <div v-if="showallcardtypes && getLanguage == 'ENG'" class="circle" @click="getCards(cardtype.fields.Filter)" v-bind:style="{background:cardtype.fields.Color}" >{{ cardtype.fields.TitleENG}} </div>
+            <div v-if="showallcardtypes && getLanguage == 'ESP'" class="circle" @click="getCards(cardtype.fields.Filter)" v-bind:style="{background:cardtype.fields.Color}" >{{ cardtype.fields.TitleESP}} </div>
+            <div v-if="showallcardtypes && getLanguage == 'BUL'" class="circle" @click="getCards(cardtype.fields.Filter)" v-bind:style="{background:cardtype.fields.Color}" >{{ cardtype.fields.TitleBUL}} </div>
+
            <!-- <div v-if="cardtype.fields.Filter==view"  class="circle" @click="getCards(cardtype.fields.Filter)"          v-bind:style="{background:cardtype.fields.Color}" >{{ cardtype.fields.Name}} </div>-->
-            <div v-if="cardtype.fields.Filter==view"  class="circle" @click="getCardTypes()"    v-bind:style="{background:cardtype.fields.Color}" >All card types</div>
-            <div v-if="cardtype.fields.Filter==view"  class="circle" @click="getAssignments('Intro assignment')"    v-bind:style="{background:cardtype.fields.Color}" >Intro assignments</div>            
-            <div v-if="cardtype.fields.Filter==view"  class="circle" @click="getAssignments('Zoom in assignment')"    v-bind:style="{background:zoomincolor}" >Zoom in<br/>assignments</div>
-            <div v-if="cardtype.fields.Filter==view"  class="circle" @click="getAssignments('Connect the dots')"    v-bind:style="{background:dotscolor}" >Connect the dots<br/>assignments</div>
-            <div v-if="cardtype.fields.Filter==view"  class="circle" @click="getTools()"    v-bind:style="{background:cardtype.fields.Color}" >Tools</div>
-            <div v-if="cardtype.fields.Filter==view"  class="circle" @click="getTools()"    v-bind:style="{background:cardtype.fields.Color}" >Knowledge base</div>
+            <div v-if="cardtype.fields.Filter==view"  class="circle" @click="getCardTypes()"    v-bind:style="{background:cardtype.fields.Color}" ><DynamicLabel :label="'All card types'" :key="'key1'+keyId" /></div>
+            <div v-if="cardtype.fields.Filter==view"  class="circle" @click="getAssignments('Intro assignment')"    v-bind:style="{background:cardtype.fields.Color}" ><DynamicLabel :label="'Intro assignments'" :key="'key2'+keyId" /></div>            
+            <div v-if="cardtype.fields.Filter==view"  class="circle" @click="getAssignments('Zoom in assignment')"    v-bind:style="{background:zoomincolor}" ><DynamicLabel :label="'Zoom in'" :key="'key3'+keyId" /><br/></div>
+            <div v-if="cardtype.fields.Filter==view"  class="circle" @click="getAssignments('Connect the dots')"    v-bind:style="{background:dotscolor}" ><DynamicLabel :label="'Connect the dots'" :key="'key4'+keyId" /><br/></div>
+            <div v-if="cardtype.fields.Filter==view"  class="circle" @click="getTools()"    v-bind:style="{background:cardtype.fields.Color}" ><DynamicLabel :label="'Tools'" :key="'key5'+keyId" />Tools</div>
+            <div v-if="cardtype.fields.Filter==view"  class="circle" @click="getTools()"    v-bind:style="{background:cardtype.fields.Color}" ><DynamicLabel :label="'Knowledge base'" :key="'key6'+keyId" /></div>
         </div>
         </div>
     </section>
 
-    <Cards :info="info" />
+    <Cards :info="info" :key="keyId" />
     
     <section class="post">
     <div class="content"  style="float: left;clear: both;width:100%;text-align:center;padding:20px;" v-if="info">     
@@ -93,6 +96,7 @@ import axios from 'axios';
 import Status from '@/components/Status.vue'
 import Cards from '@/components/Cards.vue'
 import DynamicWebText from '@/components/DynamicWebText.vue'
+import DynamicLabel from '@/components/DynamicLabel.vue'
 import VueMarkdown from 'vue-markdown'
 
 async function getData(viewStatus)
@@ -168,7 +172,7 @@ await axios.post (viewStatus.$baseUrl, formData, config)
 export default 
 {
     name: "cards",
-    components: {Status, VueMarkdown, Cards, DynamicWebText},
+    components: {Status, VueMarkdown, Cards, DynamicWebText, DynamicLabel},
 
     data() 
     {
@@ -241,8 +245,8 @@ export default
             this.view = cardtype;
             this.table = "Cards";
             this.offset = 0;
-            this.showallcardtypes = false;
-            this.dynamicLabel = 'DiscoverOverview';
+            this.showallcardtypes = false;         
+            this.dynamicLabel = cardtype +  'Intro';
             this.keyId++;
             getData(this);
            // alert(this.dynamicLabel);

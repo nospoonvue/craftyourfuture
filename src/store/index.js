@@ -6,7 +6,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    language: 'ENG'
+    language: 'ENG',
+    labels: null
   },
   mutations: {
     setLanguage(state, lang)

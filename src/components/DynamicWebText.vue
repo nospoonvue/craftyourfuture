@@ -51,33 +51,7 @@ await axios.post (viewStatus.$baseUrl, formData, config)
         {
            // alert(viewStatus.language);
            // alert(viewStatus.label);
-            viewStatus.info = response.data.records;
-       
-            if(response.data.offset)
-            {
-                viewStatus.offset = response.data.offset;
-                viewStatus.ready = true;
-            }
-            else
-            {
-                viewStatus.offset = "";                
-            }
-           
-            if(response.data.records.length==1)
-            {
-               // alert(response.data.records[0].Text);
-              // var flds = response.data.records[0].fields;
-     
-               //alert();
-               
-               
-                //alert(flds);
-              //  this.dynamicText = response.data.records[0].fields.textNL;
-            }
-            else
-            {
-              //  this.dynamicText = "multiple matches";
-            }
+            viewStatus.info = response.data.records;       
             viewStatus.loading = false;
 
         }).catch
@@ -100,7 +74,7 @@ export default
     {
     return {
         table: "WebTexts",
-        view: "Public",        
+        view: "PublicTexts",        
         info: null,
         ready: false,
         loading: false,
