@@ -3,14 +3,11 @@
 							<!-- Banner -->
 								<section id="banner" class="banner">
 									<div class="content">
-										<header>
+										<header>											
 											 <DynamicWebText :label="'Home page'" v-bind:language="this.$store.state.language" :key="getKey+this.$store.state.language"/>
 										</header>
 
 									</div>
-									<span class="image object">
-										<img src="images/mainimage.jpg" alt="" />
-									</span>
 								</section>
   </div>
 </template>
