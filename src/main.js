@@ -17,12 +17,19 @@ new Vue({
   router,
   store,
   render: h => h(App),
+  beforeCreate() {
+		this.$store.commit('initialiseStore');
+	},
   components: {
     VueMarkdown
   },
   created()
   {
-    
+    // Subscribe to store updates
+    store.subscribe((mutation, state) => {
+      // Store the state object as a JSON string
+     localStorage.setItem('store', JSON.stringify(state));
+    });
 
  
   },

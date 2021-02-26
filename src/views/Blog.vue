@@ -9,17 +9,15 @@
         <div class="content" >
         <br/>
         <span class="image object">
-                <img v-bind:src="item.fields.Photos[0].url" v-bind:alt="item.fields.Title" style="width:100%" />
+               <!-- <img v-bind:src="item.fields.Photos[0].url" v-bind:alt="item.fields.Title" style="width:100%" />-->
         </span>
             <header>
                 <h1>{{ item.fields.Title }}</h1>
-                <p><vue-markdown>{{ item.fields.Subtitle }}</vue-markdown></p>
+                <!--<p><vue-markdown>{{ item.fields.Subtitle }}</vue-markdown></p>-->
                 <h5>{{ item.fields.PublishDate }} </h5>
             </header>
             <p><vue-markdown>{{ item.fields.Article }}</vue-markdown></p>
-            <ul class="actions">
-                <li><a href="#" class="button big">Learn More</a></li>
-            </ul>
+
         </div>
 
     </section>
@@ -54,6 +52,7 @@ async function getData(viewStatus)
         }
     }
 var settings = {
+    'application': viewStatus.$appName,
     'table': viewStatus.table,
     'view': viewStatus.view,
     'pageSize': viewStatus.pageSize,
@@ -96,7 +95,7 @@ await axios.post (viewStatus.$baseUrl, formData, config)
 
 export default 
 {
-    name: "projects",
+    name: "blog",
     components: {Status, VueMarkdown},
 
     data() 

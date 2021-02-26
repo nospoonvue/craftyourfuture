@@ -76,25 +76,16 @@ export default {
     },
     methods:
     {
-        getLabel: function()
-        {
-            if(!this.$store.state.labels)
-            {
-                //load labels and store in state
-                
-            }
-            else
-            {
-                //read label translation from state
 
-            }
-            return "to implement, get from dict";
-        }
     }
     ,
     created()
     {
-        getData(this);
+        if(!this.$store.state.labels)
+        {
+            getData(this);
+        }
+        
     }
 }
 </script>
