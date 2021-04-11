@@ -10,7 +10,16 @@ export default {
   props: {
     status: { default: "./images/ajax-loader.gif", type: String  },
     statuscss: String
-  }
+  },
+    watch: {
+    /*
+    '$store.state.loading': function() {
+        if(this.$store.state.loading)
+        {
+
+        }
+    */
+    },
 }
 </script>
 

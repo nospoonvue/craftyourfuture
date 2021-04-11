@@ -8,7 +8,10 @@ export default new Vuex.Store({
   state: {
     version: '',
     language: 'ENG',
-    labels: null
+    labels: null,
+    loading: null,
+    assignments:[],
+    keId:1
   },
   mutations: {
 		initialiseStore(state) {
@@ -23,7 +26,33 @@ export default new Vuex.Store({
     setLanguage(state, lang)
       {
         this.state.language = lang;
+        this.state.keId++;
+      },
+    addAssignment(state, cardId)
+    {
+      var cardIdFound = false;
+      this.state.assignments.forEach(element => {
+          if(element == cardId) 
+          {
+              cardIdFound = true;               
+          }     
+
+      });
+      if(!cardIdFound)
+      {
+          this.state.assignments[this.state.assignments.length]= cardId;
+          this.state.keId++;
       }
+    },
+    removeAssignment(state, cardId)
+    {
+      for (var i = this.state.assignments.length - 1; i >= 0; i--) {
+        if (this.state.assignments[i] === cardId) {
+          this.state.assignments.splice(i, 1);
+        }
+       }
+       this.state.keId++;
+    }
   },
   actions: {
   },

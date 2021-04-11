@@ -1,5 +1,7 @@
 <template>
-   <section id="allcards" class="post" style="clear: both;">        
+   <section id="allcards" class="post" style="clear: both;">   
+       <DataConnection v-if="this.dataObject" :dataObject="this.dataObject" :key="'data'+keyId" />     
+        
         <div id="" class="post" v-for="item in info" :key="item.id" style="float: left;">
             <div class="content"  >
                 <br/>
@@ -8,7 +10,7 @@
                         <div  v-bind:class="item.fields.css + ' flip-card-front'" >
                             <div class="head-and-text">
                             <div v-bind:class="item.fields.css + ' card-content front-card'">
-                                <div style="text-align:right;padding-right:10px;padding-top:5px;font-size:1.8em;color:#000000;">  
+                                <div style="text-align:right;padding-right:10px;padding-top:5px;font-size:1.8em;color:#000000;" >  
                                     <!--<DynamicLabel :label="item.fields.TypeName[0]" :key="getKey+item.fields.TitleENG" />-->
                                     {{ getLabelFromCache(item.fields.TypeName[0]) }}
                                 </div>
@@ -32,11 +34,20 @@
 
                                 <iframe width="100%" height="137px" v-bind:src="item.fields.YoutubeMovie" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope;" allowfullscreen></iframe>
                                 <div style="padding:12px;" >
+                                    
                                     <div class="" v-for="(source, index) in item.fields.SourcesUrls" :key="source.Title" style="float:left;" >                         
-                                        <a v-bind:href="item.fields.SourcesUrls[index]"  target="_blank" style="text-decoration: none;border:0;" > <img src="images/link.png" :onmouseout="mouseOutSource(item.fields.TitleENG)" :onmouseover="mouseOverSource(item.fields.TitleENG, item.fields.SourceTitles[index])"  v-bind:alt="item.fields.SourceTitles[index]" style="margin:1px;" /></a>
+                                        <!--normal link-->
+                                        <a v-if="item.fields.SourceTitles[index]!='Upload assignment'" v-bind:href="item.fields.SourcesUrls[index]"  target="_blank" style="text-decoration: none;border:0;" > <img src="images/link.png" :onmouseout="mouseOutSource(item.fields.TitleENG)" :onmouseover="mouseOverSource(item.fields.TitleENG, item.fields.SourceTitles[index])"  v-bind:alt="item.fields.SourceTitles[index]" style="margin:1px;" /></a>
+                                        <!--portfolio link-->
+                                       <a v-if="item.fields.SourceTitles[index]=='Upload assignment'" v-bind:href="item.fields.SourcesUrls[index]"  target="_blank" style="text-decoration: none;border:0;" > <img src="images/see.png" :onmouseout="mouseOutSource(item.fields.TitleENG)" :onmouseover="mouseOverSource(item.fields.TitleENG, 'View work of others')"  v-bind:alt="'View others'" style="margin:1px;" /></a>
+                                        <!--upload link-->
+                                       <a v-if="item.fields.SourceTitles[index]=='Upload assignment'" v-bind:href="item.fields.SourcesUrls[index]"  target="_blank" style="text-decoration: none;border:0;" > <img src="images/upload.png" :onmouseout="mouseOutSource(item.fields.TitleENG)" :onmouseover="mouseOverSource(item.fields.TitleENG, item.fields.SourceTitles[index])"  v-bind:alt="item.fields.SourceTitles[index]" style="margin:1px;" /></a>
+                                       <!--mark complete link-->
+                                        <a v-if="item.fields.SourceTitles[index]=='Upload assignment'" @click="markComplete(item.fields.Id)"  target="_blank" style="text-decoration: none;border:0; cursor: pointer;" > <img :key="'assignment'+keyId" :src="getAssignmentStatus(item.fields.Id)" :onmouseout="mouseOutSource(item.fields.TitleENG)" :onmouseover="mouseOverSource(item.fields.TitleENG, 'Mark as complete')"  alt="mark as complete" style="margin:1px;" /></a>
                                     </div>
+                                    
                                 </div>
-                                <div v-bind:class="item.fields.css" style="margin-top:55px;height:35px; border-radius: 0 0 15px 15px;padding:6px;" :id="item.fields.TitleENG" > </div>
+                                <div v-bind:class="item.fields.css" style="margin-top:55px;height:35px; border-radius: 0 0 15px 15px;padding:6px;" :id="item.fields.TitleENG" ></div>
                             </div>
                         </div>
 
@@ -45,9 +56,12 @@
 
             </div>
         </div>
+        
     </section>
 </template>
+
 <style scoped>
+
 
 @import url('https://use.typekit.net/mqh8lqg.css');
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
@@ -171,27 +185,106 @@ padding: 1em;
   transform: rotateY(180deg);
 }
 </style>
+
 <script>
 import DynamicLabel from '@/components/DynamicLabel.vue'
+import DataConnection from '@/components/DataConnection.vue'
+
 
 export default {    
 
   name: 'Cards',
   components:
   {
-      DynamicLabel
+      DynamicLabel, DataConnection
   },
   data()
   {
       return{   
-          keyId: 1
+            info: null,         
+            keyId: 1
+        
       }
   },
   props: {
-    info: null
+        dataObject: 
+        {
+            table: "Cards",
+            view: "Public",
+            filter: null,
+            fields: null,
+            page: null,
+            paging: true,
+            pageSize:10,
+            offset: 0,
+            cursor: 0,
+            startLoading: false,
+            ready:false
+        }
     },
     methods:
     {
+        assignmentMarked : function(cardId)
+        {
+           var found = false;
+            this.$store.state.assignments.forEach(element => {
+                
+                if(element === cardId)
+                {
+                    //alert(element +" - "+cardId);
+                    found = true;
+                    
+                }
+            });
+            return found;
+        },
+        getAssignmentStatus :function(cardId)
+        {
+            if(this.assignmentMarked(cardId))
+                return "images/completeGreen.png";
+            else
+                return "images/complete.png";
+        },
+        markComplete: function(cardId)
+        {
+        
+            if(this.assignmentMarked(cardId))
+            {
+                 this.$store.commit('removeAssignment',cardId);	
+            }
+            else
+            {
+                this.$store.commit('addAssignment',cardId);	
+                this.keyId++;
+            }
+            
+
+            if(this.$store.state.assignments.length > 2)
+            {
+                //enable zoom-in
+                this.$emit("enableZoomIn");
+                //alert('Zoom-in assignment enabled');
+                console.log('Zoom-in assignment enabled');
+            }
+
+            if(this.$store.state.assignments.length > 3)
+            {
+                //enable zoom-in
+                this.$emit("enableConnectTheDots");
+                //alert('Connect the dots assignment enabled');
+                console.log('Connect the dots assignment enabled');
+            }
+
+            if(this.$store.state.assignments.length > 6)
+            {
+                //enable zoom-in
+                this.$emit("enableCertificate");
+                //alert('Certificate enabled');
+                console.log('certificate enabled');
+            }
+             console.log(this.$store.state.assignments.length);
+          //  alert(this.$store.state.assignments.length);
+        },
         mouseOutSource: function(divId)
         {            
   
@@ -203,10 +296,10 @@ export default {
         }  
         ,
         getLabelFromCache: function(label)
-        {
+        {            
                 //read label translation from state
                 let index = this.$store.state.labels.findIndex(item => item.fields.Label === label );
-         
+               // alert(label);
                 switch(this.$store.state.language)
                 {
                     case "ENG":
