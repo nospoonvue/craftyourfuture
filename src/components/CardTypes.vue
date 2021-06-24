@@ -6,7 +6,7 @@
         <div id="CardFlow">    
             <section id="ctypes" class="post" style=" ">
                 <div style="width=100%">
-                    <div  v-for="cardtype in info" :key="cardtype.Id"  style=" display: inline-block;height:120px;" >              
+                    <div  v-for="cardtype in info" :key="cardtype.Id"  style=" display: inline-block;height:120px;margin-bottom:20px;" >              
                                   
                         <div class="circle" :id="cardtype.fields.Filter" @click="getCards(cardtype.fields.TitleENG)" v-bind:style="{background:cardtype.fields.Color}" >{{ getLabel(cardtype.fields)}} </div>
                     </div>

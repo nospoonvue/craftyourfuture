@@ -1,9 +1,12 @@
 <template>
- <div :class="css">{{ translatedLabel }}</div>
+ <div class="labelclass">{{ translatedLabel }}</div>
 </template>
 
 <style >
-
+.labelclass
+{
+    font-family:'Comfortaa';
+}
 </style>
 <script>
 
@@ -23,7 +26,7 @@ export default {
   props: {
     id: 1,  
     label: null,
-    css: null,
+    css: "labelclass",
     },
     methods:
     {

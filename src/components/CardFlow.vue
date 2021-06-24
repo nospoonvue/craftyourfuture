@@ -42,12 +42,12 @@
     {
         float:left;
         cursor: pointer;
-        width:100px;
-        height:100px;
+        width:150px;
+        height:150px;
         border-radius:50%;
         font-size:10px;
         color:#ffffff;
-        line-height:100px;
+        line-height:150px;
         text-align:center;
         margin: 5px;    
     }

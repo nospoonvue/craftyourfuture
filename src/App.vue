@@ -13,7 +13,7 @@
 									<ul class="icons">
 										<!-- <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>-->
 										<li><a href="https://www.facebook.com/craftyourfuture21" target="_blank" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-										<li><a href="https://www.linkedin.com/in/frankkroondijk/" target="_blank" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+						
 										<li><a href="https://www.instagram.com/craftyourfuture21/" target="_blank" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
 										<!-- <li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>		-->
                    						<li><nav id="nav"><router-link to="/login"><div id="un">{{loginLabel}}</div></router-link></nav></li>
@@ -29,7 +29,7 @@
               					<router-view/>
 								  <div id="wrap">
 								<footer id="footer"  style="float:left; clear: both;width:100%;">
-									<div style="width:100%;text-align:center;padding:20px;">
+									<div style="width:100%;text-align:center;padding:50px;">
 									<p class="copyright">&copy; Craft Your Future</p>
 									</div>
 								</footer>
@@ -69,7 +69,7 @@
 										<li><router-link to="/discover"><DynamicLabel label="Get started"  :key="'started'+getKey"/></router-link></li>							
 										<li><router-link to="/knowledgebase" ><DynamicLabel label="Knowledge base"  :key="'base'+getKey"/></router-link></li>
 										<li><router-link to="/tools" ><DynamicLabel label="Tools"  :key="'tools'+getKey"/></router-link></li>
-										<li><router-link to="/blog" ><DynamicLabel label="Blog"  :key="'blog'+getKey"/></router-link></li>
+										<li><router-link to="/teacher" ><DynamicLabel label="Teacher manual"  :key="'teacher'+getKey"/></router-link></li>
 									</ul>
 								</nav>
               				</div>
