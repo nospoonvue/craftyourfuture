@@ -12,10 +12,10 @@
                     </div>
                 </div>
                 <div >
-                <div style="float:left;padding-top:120px;">
+                <div style="float:left;padding-top:160px;">
                     <div @click="getZoomInAssignment" class="circle" v-bind:style="{background:'#2e2554'}" id="zoom" ><DynamicLabel label="Zoom in"  :key="'zoom'+getKey"/><i v-if="!zoomInEnabled" class="fas fa-lock"></i></div>
                 </div>
-                <div style="float:left;padding-top:120px;">
+                <div style="float:left;padding-top:160px;">
                     <div @click="getConnectTheDotsAssignment" class="circle" v-bind:style="{background:'#2e2552'}" id="connect" ><DynamicLabel label="Connect the dots"  :key="'connect'+getKey"/><i v-if="!connectTheDotsEnabled" class="fas fa-lock"></i></div>
                 </div>
                 <!--
