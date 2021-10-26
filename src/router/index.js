@@ -9,7 +9,10 @@ import Courses from '../views/Courses.vue'
 import Course from '../views/Course.vue'
 import Discover from '../views/Discover.vue'
 import Tools from '../views/Tools.vue'
-import Teachers from '../views/Teachers.vue'
+import Teacher from '../views/Teacher.vue'
+import Alliance from '../views/Alliance.vue'
+
+
 
 Vue.use(VueRouter)
 
@@ -45,10 +48,15 @@ Vue.use(VueRouter)
       component: Tools
       },
       {
-        path: '/teachers',
-        name: 'Teachers',
-        component: Teachers
+        path: '/teacher',
+        name: 'Teacher',
+        component: Teacher
         },      
+        {
+          path: '/alliance',
+          name: 'Alliance',
+          component: Alliance
+          },   
   {
   path: '/login',
   name: 'Login',

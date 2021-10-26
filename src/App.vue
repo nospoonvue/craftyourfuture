@@ -16,7 +16,7 @@
 						
 										<li><a href="https://www.instagram.com/craftyourfuture21/" target="_blank" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
 										<!-- <li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>		-->
-                   						<li><nav id="nav"><router-link to="/login"><div id="un">{{loginLabel}}</div></router-link></nav></li>
+                   						<!--<li><nav id="nav"><router-link to="/login"><div id="un">{{loginLabel}}</div></router-link></nav></li>-->
 										<li>
 											<a @click="setLanguage('ENG')" ><img src="images/united-kingdom.svg" class="flag"></a>
 											<a @click="setLanguage('NL')" ><img src="images/netherlands.svg" class="flag"></a>
@@ -70,6 +70,8 @@
 										<li><router-link to="/knowledgebase" ><DynamicLabel label="Knowledge base"  :key="'base'+getKey"/></router-link></li>
 										<li><router-link to="/tools" ><DynamicLabel label="Tools"  :key="'tools'+getKey"/></router-link></li>
 										<li><router-link to="/teacher" ><DynamicLabel label="Teacher manual"  :key="'teacher'+getKey"/></router-link></li>
+										<li><router-link to="/alliance" ><DynamicLabel label="Alliance"  :key="'alliance'+getKey"/></router-link></li>
+										<li><router-link to="/blog" ><DynamicLabel label="Blog"  :key="'blog'+getKey"/></router-link></li>
 									</ul>
 								</nav>
               				</div>
@@ -129,6 +131,7 @@ export default {
 		{
 			this.$store.commit('setLanguage',lang);		
 			this.keyId++;
+			location.reload();
 		}      
    },
    computed:

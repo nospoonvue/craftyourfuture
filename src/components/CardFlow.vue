@@ -8,19 +8,21 @@
                 <div style="float:left;">
                     <div  v-for="cardtype in info" :key="cardtype.Id" style="height:120px;" class="content">                        
                         <div class="circle" :id="cardtype.fields.Filter" @click="getCards(cardtype.fields.TitleENG)" v-bind:style="{background:cardtype.fields.Color}" >{{ getLabel(cardtype.fields)}} </div>
-                        <div class="circle" :id="cardtype.fields.Filter+'Assignment'" @click="getAssignments(cardtype.fields.TitleENG)" v-bind:style="{background:cardtype.fields.Color}" >{{ 'Intro assignment'}} </div>                        
+                        <div class="circle" :id="cardtype.fields.Filter+'Assignment'" @click="getAssignments(cardtype.fields.TitleENG)" v-bind:style="{background:cardtype.fields.Color}" ><DynamicLabel label="Intro assignment"  :key="'introass'+getKey"/></div>                        
                     </div>
                 </div>
                 <div >
                 <div style="float:left;padding-top:120px;">
-                    <div @click="getZoomInAssignment" class="circle" v-bind:style="{background:'#2e2554'}" id="zoom" >{{ 'Zoom in '}}  <i v-if="!zoomInEnabled" class="fas fa-lock"></i></div>
+                    <div @click="getZoomInAssignment" class="circle" v-bind:style="{background:'#2e2554'}" id="zoom" ><DynamicLabel label="Zoom in"  :key="'zoom'+getKey"/><i v-if="!zoomInEnabled" class="fas fa-lock"></i></div>
                 </div>
                 <div style="float:left;padding-top:120px;">
-                    <div @click="getConnectTheDotsAssignment" class="circle" v-bind:style="{background:'#2e2552'}" id="connect" >{{ 'Connect'}} <i v-if="!connectTheDotsEnabled" class="fas fa-lock"></i></div>
+                    <div @click="getConnectTheDotsAssignment" class="circle" v-bind:style="{background:'#2e2552'}" id="connect" ><DynamicLabel label="Connect the dots"  :key="'connect'+getKey"/><i v-if="!connectTheDotsEnabled" class="fas fa-lock"></i></div>
                 </div>
+                <!--
                 <div style="float:left;padding-top:120px;">
                     <div @click="getCertificate" class="circle" v-bind:style="{background:'#2e2550'}" id="certificate">{{ 'Certificate'}} <i v-if="!certificateEnabled" class="fas fa-lock"></i></div>
                 </div>
+                -->
                 </div>
             </section>
         </div>
@@ -91,11 +93,11 @@
    
 
 import DataConnection from '@/components/DataConnection.vue'
-
+import DynamicLabel from '@/components/DynamicLabel.vue'
 
 export default {
   name: 'CardFlow',
-  components: {DataConnection},
+  components: {DataConnection,DynamicLabel},
    data() 
     {
     return {
@@ -243,7 +245,7 @@ export default {
             });            
         },
         getLabel: function(cardType)
-        {
+        {           
             switch (this.$store.state.language)
             {
                 case "NL":

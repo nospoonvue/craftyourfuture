@@ -35,9 +35,15 @@
                                 <iframe width="100%" height="137px" v-bind:src="item.fields.YoutubeMovie" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope;" allowfullscreen></iframe>
                                 <div style="padding:12px;" >
                                     
-                                    <div class="" v-for="(source, index) in item.fields.SourcesUrls" :key="source.Title" style="float:left;" >                         
+
+                                    <div class="" v-for="(source, index) in item.fields.SourcesUrls" :key="source.Title" style="float:left;" >     
+                                        <!--tool link-->
+                                        <a v-if="item.fields.TypeName=='Tools'" v-bind:href="getLink(item)"  target="_blank" style="text-decoration: none;border:0;" > <img src="images/link.png" :onmouseout="mouseOutSource(getLabel('Title', item))" :onmouseover="mouseOverSource(getLabel('Title', item), item.fields.SourceTitles[index])"  v-bind:alt="item.fields.SourceTitles[index]" style="margin:1px;" /></a>
+                        
                                         <!--normal link-->
-                                        <a v-if="item.fields.SourceTitles[index]!='Upload assignment'" v-bind:href="item.fields.SourcesUrls[index]"  target="_blank" style="text-decoration: none;border:0;" > <img src="images/link.png" :onmouseout="mouseOutSource(item.fields.TitleENG)" :onmouseover="mouseOverSource(item.fields.TitleENG, item.fields.SourceTitles[index])"  v-bind:alt="item.fields.SourceTitles[index]" style="margin:1px;" /></a>
+                                        <div v-if="item.fields.TypeName!='Tools'">
+                                         <a v-if="item.fields.SourceTitles[index]!='Upload assignment'" v-bind:href="item.fields.SourcesUrls[index]"  target="_blank" style="text-decoration: none;border:0;" > <img src="images/link.png" :onmouseout="mouseOutSource(item.fields.TitleENG)" :onmouseover="mouseOverSource(item.fields.TitleENG, item.fields.SourceTitles[index])"  v-bind:alt="item.fields.SourceTitles[index]" style="margin:1px;" /></a>
+                                        </div>
                                         <!--portfolio link-->
                                        <a v-if="item.fields.SourceTitles[index]=='Upload assignment'" v-bind:href="item.fields.SourcesUrls[index]"  target="_blank" style="text-decoration: none;border:0;" > <img src="images/see.png" :onmouseout="mouseOutSource(item.fields.TitleENG)" :onmouseover="mouseOverSource(item.fields.TitleENG, 'View work of others')"  v-bind:alt="'View others'" style="margin:1px;" /></a>
                                         <!--upload link-->
@@ -298,8 +304,12 @@ export default {
         getLabelFromCache: function(label)
         {            
                 //read label translation from state
+               
                 let index = this.$store.state.labels.findIndex(item => item.fields.Label === label );
-               // alert(label);
+
+                //alert(index);
+                if(index = -1)return "";
+
                 switch(this.$store.state.language)
                 {
                     case "ENG":
@@ -315,6 +325,25 @@ export default {
                         return this.$store.state.labels[index].fields.TextBUL;
                         break;                    
                 }
+        },
+        getLink: function(source)
+        {            
+
+                  switch(this.$store.state.language)
+                    {
+                        case "ENG":
+                            return source.fields.FilesENG[0].url;
+                            break;
+                        case "NL":
+                            return source.fields.FilesNL[0].url;
+                            break;
+                        case "ESP":
+                            return source.fields.FilesESP[0].url;
+                            break;
+                        case "BUL":
+                            return source.fields.FilesBUL[0].url;
+                            break;
+                    }
         },
         getLabel: function(typeLabel, source)
         {
